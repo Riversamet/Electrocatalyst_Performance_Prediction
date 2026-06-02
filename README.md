@@ -49,17 +49,13 @@ For the classification task, catalysts with `|overpotential| < 0.6` are defined 
 
 Initially, a default random forest model was trained. Evidence of overfitting was observed because cross-validation training metrics were substantially higher than validation metrics (shown below).
 
-Training Set Metrics:
-Precision : Mean = 1.00, Std = 0.00
-Recall    : Mean = 1.00, Std = 0.00
-F1        : Mean = 1.00, Std = 0.00
+### Initial Random Forest Cross-Validation Results
 
-Validation Set Metrics:
-Precision : Mean = 0.74, Std = 0.06
-Recall    : Mean = 0.66, Std = 0.09
-F1        : Mean = 0.69, Std = 0.04
-
- ================================
+| Metric | Training | Validation |
+|----------|----------|----------|
+| Precision | 1.00 ± 0.00 | 0.74 ± 0.06 |
+| Recall | 1.00 ± 0.00 | 0.66 ± 0.09 |
+| F1 | 1.00 ± 0.00 | 0.69 ± 0.04 |
 
 To understand why the random forest was overfitting, one representative tree from the default model was plotted and the tree structure was used to guide hyperparameter tuning.
 
@@ -67,17 +63,13 @@ To understand why the random forest was overfitting, one representative tree fro
 
 Hyperparameters including `max_depth`, `min_samples_split`, and `min_samples_leaf` were altered, as the representative tree for the base model is quite deep, and this model creates leaves and branches that include very few data points. Other hyperparameters, such as the number of trees, as well as `max_features` were altered as well. Hyperparameters were selected through iterative experimentation informed by model diagnostics and tree visualization rather than exhaustive grid search. The results from the best set of chosen hyperparameters for modeling is shown below.
 
-Training Set Metrics:
-Precision : Mean = 0.81, Std = 0.02
-Recall    : Mean = 0.75, Std = 0.02
-F1        : Mean = 0.78, Std = 0.02
+### Final Random Forest Cross-Validation Results
 
-Validation Set Metrics:
-Precision : Mean = 0.73, Std = 0.04
-Recall    : Mean = 0.66, Std = 0.05
-F1        : Mean = 0.69, Std = 0.03
-
- ================================
+| Metric | Training | Validation |
+|----------|----------|----------|
+| Precision | 0.81 ± 0.02 | 0.73 ± 0.04 |
+| Recall | 0.75 ± 0.02 | 0.66 ± 0.05 |
+| F1 | 0.78 ± 0.02 | 0.69 ± 0.03 |
 
 A representative tree is also shown.
 
@@ -89,10 +81,13 @@ The final model was selected because validation metrics were slightly better tha
 
 Validation metrics for this model were also marginally better than those with other sets of manually chosen hyperparameters. From here, test set metrics were obtained using the final chosen model (shown below).
 
-Test Set Metrics:
-Precision = 0.83
-Recall = 0.70
-F1 = 0.76
+### Final Random Forest Test Results
+
+| Metric | Test |
+|----------|----------|
+| Precision | 0.83 |
+| Recall | 0.70 |
+| F1 | 0.76 |
 
 Metrics from the test set predictions were relatively similar to those of the validation and training sets. This suggests reduced overfitting relative to the baseline model and indicates improved generalization performance. Metrics leave substantial room for improvement, however, which may be done through further tuning of hyperparameters or using other classification models, such as gradient boosting machines (e.g., XGBoost).
 
@@ -100,10 +95,13 @@ Using the selected random forest hyperparameters, the 5-fold cross-validation wo
 
 The slightly improved performance may be related to the larger training set, although differences should be interpreted cautiously due to the smaller test set.
 
-Test Set Metrics:
-Precision = 0.70
-Recall = 0.88
-F1 = 0.78
+### Final Random Forest Test Results For Alternative Splitting Method
+
+| Metric | Test |
+|----------|----------|
+| Precision | 0.70 |
+| Recall | 0.88 |
+| F1 | 0.78 |
 
 ## Part 3: MLP Regression
 
@@ -111,33 +109,32 @@ For the regression task, the overpotential value was predicted directly using mu
 
 Five-fold cross-validation was used to evaluate model performance based on training and validation data. MSE and RMSE values quantitatively indicate how well the model predicted catalyst overpotential values.
 
-Training Set Metrics:
-MSE: Mean = 0.01, Std = 0.00
-RMSE: Mean = 0.11, Std = 0.00
+### Initial MLP Cross-Validation Results
 
-Validation Set Metrics:
-MSE: Mean = 0.03, Std = 0.00
-RMSE: Mean = 0.16, Std = 0.01
+| Metric | Training | Validation |
+|----------|----------|----------|
+| MSE | 0.01 ± 0.00 | 0.03 ± 0.00 |
+| RMSE | 0.11 ± 0.00 | 0.16 ± 0.01 |
 
 The 5 most important features determined using the MLP base model were Co, Ni, Se, P, and Voltage.
 
 From here, four MLP hyperparameter combinations were tested and cross-validation performance was compared to develop an improved model. The results from the final chosen model are shown below.
 
-Training Set Metrics:
-MSE: Mean = 0.01, Std = 0.00
-RMSE: Mean = 0.10, Std = 0.00
+### Final MLP Cross-Validation Results
 
-Validation Set Metrics:
-MSE: Mean = 0.01, Std = 0.00
-RMSE: Mean = 0.12, Std = 0.01
-
- ================================
+| Metric | Training | Validation |
+|----------|----------|----------|
+| MSE | 0.01 ± 0.00 | 0.01 ± 0.00 |
+| RMSE | 0.10 ± 0.00 | 0.12 ± 0.01 |
 
 This model appeared to be best because the MSE and RMSE values were relatively low while remaining reasonably comparable across the training and validation sets. Test set metrics were then calculated for this model, and permutation feature importances were used to determine the five most important features influencing overpotential values. These results are shown below.
 
-Test Set Metrics:
-MSE = 0.01
-RMSE = 0.11
+### Final MLP Test Results
+
+| Metric | Test |
+|----------|----------|
+| MSE | 0.01 |
+| RMSE | 0.11 |
 
 The 5 most important features based on the final model for MLP were Co, Se, Ni, V, and Time.
 
