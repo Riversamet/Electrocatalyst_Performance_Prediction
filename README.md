@@ -3,7 +3,6 @@ This project models electrocatalytic activity for the hydrogen evolution reactio
 
 ## Objectives:
 
-- Split data into training, validation, and testing sets using train_test_split
 - Build random forest models and tune hyperparameters
 - Build multilayer perceptron models and tune hyperparameters
 - Cross-validate model performance using 5-fold cross-validation
@@ -17,7 +16,7 @@ This project models electrocatalytic activity for the hydrogen evolution reactio
 - pandas
 - NumPy
 - scikit-learn
-- matplotlib
+- Matplotlib
 
 ## Key results
 
