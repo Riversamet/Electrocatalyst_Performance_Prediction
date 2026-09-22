@@ -74,9 +74,9 @@ A representative tree is also shown.
 
 <img width="1880" height="1252" alt="image" src="https://github.com/user-attachments/assets/96134db3-1376-4943-87a0-80994cc6cfd9" />
 
-Cross-validation results indicated that all tested hyperparameter configurations perform similarly on unseen validation data. All tuned models reduced the gap between training and validation performance compared to the base model, but improvements in validation metrics were relatively small. This suggests that model performance is relatively robust to moderate changes in the tested hyperparameters.
+Cross-validation results indicated that all tested hyperparameter configurations perform similarly on unseen validation data. All tuned models reduced the gap between training and validation performance compared to the base model, but validation metrics were almost identical. This suggests that model performance is relatively robust to moderate changes in the tested hyperparameters.
 
-The final model was selected because validation metrics were slightly better than those of the base model while also exhibiting a smaller gap between training and validation performance. This suggests that this model may provide a slightly better balance between predictive performance and generalization.
+The final model was selected because its validation metrics match those of the base model (F1 0.69 for both) while exhibiting a much smaller gap between training and validation performance (training F1 0.78 vs. 1.00), and slightly lower variability across folds (F1 std 0.03 vs. 0.04). This suggests that this model may provide a better balance between predictive performance and generalization.
 
 Validation metrics for this model were also marginally better than those with other sets of manually chosen hyperparameters. From here, test set metrics were obtained using the final chosen model (shown below).
 
