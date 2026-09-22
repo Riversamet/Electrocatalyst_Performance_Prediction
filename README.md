@@ -22,7 +22,7 @@ This project models electrocatalytic activity for the hydrogen evolution reactio
 ## Key results
 
 - Random forest classifier achieved a test F1 score of 0.76.
-- Hyperparameter tuning reduced overfitting and improved metrics compared to the default model.
+- Hyperparameter tuning did not improve validation metrics (F1 0.69 before and after) but substantially reduced overfitting, closing the train/validation F1 gap from 0.31 to 0.09.
 - MLP regression achieved a test RMSE of 0.11.
 - Most influential variables included Co, Ni, Se, V, and Time.
 - Model performance remained consistent across train, validation, and test datasets, suggesting reasonable generalization.
